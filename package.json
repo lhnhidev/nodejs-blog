@@ -2,9 +2,9 @@
   "name": "nodejs-blog",
   "version": "1.0.0",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
+    "watch": "sass --watch src/sass/style.scss:src/public/css/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "sass": "^1.89.0"
   }
 }
