@@ -15,6 +15,9 @@
     "express-handlebars": "^8.0.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.10",
     "sass": "^1.89.0"
