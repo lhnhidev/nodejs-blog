@@ -4,4 +4,4 @@ const searchController = require('../controller/search.controller');
 
 route.get('/', searchController.index);
 
-module.exports = route; 
+module.exports = route;

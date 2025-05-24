@@ -9,7 +9,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "**/*": "prettier --write ."
+    "src/**/*.{js,json,scss}": "prettier --write ."
   },
   "husky": {
     "hooks": {

@@ -4,4 +4,4 @@ const carController = require('../controller/cart.controller');
 
 route.get('/', carController.index);
 
-module.exports = route; 
+module.exports = route;
