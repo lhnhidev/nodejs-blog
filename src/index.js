@@ -14,6 +14,7 @@ const port = 3000;
 // Cách dùng static file
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
 // morgan: dùng để console.log ra tín hiệu từ client gửi đến server
 app.use(morgan('combined'));

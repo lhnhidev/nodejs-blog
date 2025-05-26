@@ -1,1 +1,16 @@
-<h1>MAIN CONTENT</h1>
+<div class='mt-4 p-3 d-flex'>
+  {{#each courses}}
+    <div class='card mx-3' style='width: 18rem;'>
+      <a href='courses/{{this.slug}}'>
+        <img src='{{this.image}}' class='card-img-top' alt='{{this.name}}' />
+      </a>
+      <div class='card-body'>
+        <a href='courses/{{this.slug}}'>
+          <h5 class='card-title'>{{this.name}}</h5>
+        </a>
+        <p class='card-text'>{{this.desc}}</p>
+        <a href='courses/{{this.slug}}' class='btn btn-primary'>Mua</a>
+      </div>
+    </div>
+  {{/each}}
+</div>

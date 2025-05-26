@@ -1,12 +1,13 @@
 const Course = require('../models/courses');
+const { arrayToObejct } = require('../util/toObject');
 
 class HomeController {
-  index(req, res) {
-    // res.render('../views/home.hbs');
+  index(req, res, next) {
     Course.find()
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    res.send('hello');
+      .then((courses) => {
+        res.render('home', { courses: arrayToObejct(courses) });
+      })
+      .catch((err) => console.log(next(err)));
   }
 }
 
