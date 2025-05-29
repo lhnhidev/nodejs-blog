@@ -4,6 +4,7 @@ const path = require('path');
 const { engine } = require('express-handlebars');
 const router = require('./routes');
 const db = require('./config/db');
+const methodOverride = require('method-override');
 
 db.connect();
 
@@ -18,12 +19,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // morgan: dùng để console.log ra tín hiệu từ client gửi đến server
 app.use(morgan('combined'));
+app.use(methodOverride('_method'));
 
 // tạo view engine (express-handlebars)
 app.engine(
   'hbs',
   engine({
     extname: '.hbs',
+    helpers: {
+      sum: (a, b) => a + b,
+    },
   }),
 );
 app.set('view engine', 'hbs');
