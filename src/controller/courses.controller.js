@@ -23,6 +23,12 @@ class CoursesController {
       })
       .catch((err) => next(err));
   }
+
+  delete(req, res, next) {
+    Courses.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect(req.get('referer')))
+      .catch((err) => next(err));
+  }
 }
 
 module.exports = new CoursesController();

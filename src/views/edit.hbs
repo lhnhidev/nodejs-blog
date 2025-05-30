@@ -1,20 +1,42 @@
 <h2 class='text-center mt-4'>Chỉnh sửa khóa học</h2>
-<form class='px-4' method='POST' action="/courses/{{this._id}}?_method=PUT">
+<form class='px-4' method='POST' action='/courses/{{this._id}}?_method=PUT'>
   <div class='form-group'>
     <label for='name'>Tên khóa học</label>
-    <input type='text' class='form-control' id='name' name='name' value="{{this.name}}" />
+    <input
+      type='text'
+      class='form-control'
+      id='name'
+      name='name'
+      value='{{this.name}}'
+    />
   </div>
   <div class='form-group'>
     <label for='description'>Miêu tả khóa học</label>
-    <textarea name="desc" id="description" class="form-control">{{this.desc}}</textarea>
+    <textarea
+      name='desc'
+      id='description'
+      class='form-control'
+    >{{this.desc}}</textarea>
   </div>
   <div class='form-group'>
     <label for='image'>Đường dẫn ảnh</label>
-    <input type='text' class='form-control' id='image' name='image' value="{{this.image}}" />
+    <input
+      type='text'
+      class='form-control'
+      id='image'
+      name='image'
+      value='{{this.image}}'
+    />
   </div>
   <div class='form-group'>
     <label for='youtube'>Đường dẫn video Youtube</label>
-    <input type='text' class='form-control' id='youtube' name='url' value="{{this.url}}" />
+    <input
+      type='text'
+      class='form-control'
+      id='youtube'
+      name='url'
+      value='{{this.url}}'
+    />
   </div>
 
   <button type='submit' class='btn btn-primary'>Lưu lại</button>
