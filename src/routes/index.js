@@ -5,21 +5,17 @@ const newsRouter = require('./news.routes');
 const coursesRouter = require('./courses.routes');
 const createRouter = require('./create.routes');
 const meRouter = require('./me.routes.js');
+const trashRouter = require('./trash.routes.js');
 
 const router = (app) => {
   app.use('/search', searchRouter);
-
   app.use('/cart', cartRouter);
-
   app.use('/news', newsRouter);
-
   app.use('/', homeRouter);
-
   app.use('/courses', coursesRouter);
-
   app.use('/create', createRouter);
-
   app.use('/me', meRouter);
+  app.use('/trash', trashRouter);
 };
 
 module.exports = router;

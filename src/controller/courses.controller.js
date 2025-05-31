@@ -6,8 +6,6 @@ class CoursesController {
     Courses.findOne({ slug: req.params.slug }).then((course) => {
       res.render('../views/courses.hbs', toObject(course));
     });
-
-    // res.render('courses', res.params.slug);
   }
 
   edit(req, res, next) {
@@ -25,8 +23,21 @@ class CoursesController {
   }
 
   delete(req, res, next) {
-    Courses.deleteOne({ _id: req.params.id })
+    Courses.delete({ _id: req.params.id })
       .then(() => res.redirect(req.get('referer')))
+      .catch((err) => next(err));
+  }
+
+  destroy(req, res, next) {
+    Courses.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect('/trash'))
+      .catch((err) => next(err));
+  }
+
+  restore(req, res, next) {
+    Courses.restore({ _id: req.params.id })
+      .then(() => Courses.updateOne({ _id: req.params.id }, { deleted: false }))
+      .then(() => res.redirect('/trash'))
       .catch((err) => next(err));
   }
 }

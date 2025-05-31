@@ -1,5 +1,5 @@
 <div class='container'>
-  <a href="/trash">Thùng rác</a>
+  <h1 class='text-center'>Thùng rác</h1>
   <table class='table'>
     <thead>
       <tr>
@@ -9,35 +9,45 @@
       </tr>
     </thead>
     <tbody>
-      {{#each courses}}
+      {{#each course}}
         <tr>
           <td>{{sum @index 1}}</td>
           <td>{{this.name}}</td>
           <td class=''>
-            <a
-              href='/courses/{{this._id}}/edit'
+            <form
+              method='POST'
+              action='/courses/{{this._id}}/restore?_method=PATCH'
+            >
+              <button type='submit' class='button-primary mx-4'>Khôi phục</button>
+            </form>
+
+            <button
+              data-toggle='modal'
+              data-target={{createId '#modal' @index}}
+              type='submit'
               class='button-primary mx-4'
-            >Sửa</a>
-            <a
+            >Xóa vĩnh viễn</button>
+            {{!-- <a
               class='button-primary mx-4'
               data-toggle='modal'
               data-target={{createId '#modal' @index}}
-            >Xóa</a>
+            >Xóa vĩnh viễn</a> --}}
           </td>
         </tr>
       {{else}}
-        <p>Bạn chưa thêm khóa học nào. <a href="">Thêm khóa học</a></p>
+        <p class='text-center'>Thùng rác trống.
+          <a href='/me/my-courses'>Danh sách khóa học</a></p>
       {{/each}}
     </tbody>
   </table>
 </div>
 
-{{#each courses}}
+{{#each course}}
   <div class='modal' tabindex='-1' id={{createId 'modal' @index}}>
     <div class='modal-dialog'>
       <div class='modal-content'>
         <div class='modal-header'>
-          <h5 class='modal-title'>Xóa khóa học?</h5>
+          <h5 class='modal-title'>Xóa vĩnh viễn khóa học?</h5>
           <button
             type='button'
             class='close'
@@ -48,12 +58,12 @@
           </button>
         </div>
         <div class='modal-body'>
-          <p>Khóa học này sẽ bị xóa khỏi danh sách.</p>
+          <p>Hành động này sẽ không thể khôi phục.</p>
         </div>
         <div class='modal-footer'>
           <form
             method='POST'
-            action='/courses/{{this._id}}/delete?_method=DELETE'
+            action='/courses/{{this._id}}/force?_method=DELETE'
           >
             <button type='submit' class='btn btn-danger'>Xóa</button>
           </form>
