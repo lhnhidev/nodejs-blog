@@ -2,11 +2,14 @@ const Course = require('../models/courses');
 const { arrayToObejct } = require('../util/toObject');
 
 class MeController {
-  show(req, res, next) {
-    Course.find({})
-      .then((course) => {
-        res.render('my-courses', { courses: arrayToObejct(course) });
-      })
+  async show(req, res, next) {
+    Promise.all([
+      Course.find({}),
+      Course.countDocumentsWithDeleted({ deleted: true }),
+    ])
+      .then(([course, count]) =>
+        res.render('my-courses', { courses: arrayToObejct(course), count }),
+      )
       .catch((err) => next(err));
   }
 }
