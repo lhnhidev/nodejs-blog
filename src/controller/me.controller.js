@@ -40,11 +40,19 @@ class MeController {
   }
 
   delete(req, res, next) {
-    req.body.idCourses.forEach((id) => {
-      Course.delete({ _id: id })
-        .then(() => res.redirect('/me/my-courses'))
-        .catch((err) => next(err));
-    });
+    const handleDelete = (listId) => {
+      listId.forEach((id) => {
+        Course.delete({ _id: id })
+          .then(() => res.redirect('/me/my-courses'))
+          .catch((err) => next(err));
+      });
+    };
+
+    if (typeof req.body.idCourses == 'string') {
+      handleDelete([req.body.idCourses]);
+    } else {
+      handleDelete(req.body.idCourses);
+    }
   }
 }
 
