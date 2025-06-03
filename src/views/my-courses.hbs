@@ -1,9 +1,30 @@
-<div class='container'>
+<form class='container' method="POST" action="/me/my-courses?_method=DELETE">
   {{!-- {{courses.deleted}} --}}
   <a href='/trash'>Thùng rác ({{count}})</a>
+  <div class='d-flex align-items-center mb-3 mt-3'>
+    <div>
+      <label for='selectAllItemBoxs'>Chọn tất cả</label>
+      <input class='mr-4' type='checkbox' id='selectAllItemBoxs' />
+    </div>
+
+    <div class='input-group' style="width: 300px;">
+      <div class='input-group-prepend'>
+        <label class='input-group-text' for='inputGroupSelect'>Tùy chọn</label>
+      </div>
+      <select name="method" class='custom-select' id='inputGroupSelect' disabled>
+        <option selected>Chọn</option>
+        <option value='delete'>Xóa</option>
+        {{! <option value='2'>Two</option> }}
+        {{! <option value='3'>Three</option> }}
+      </select>
+    </div>
+
+    <button type="submit" class="ml-4 btn btn-primary" id="btnSubmitAction" disabled>Thực hiện</button>
+  </div>
   <table class='table'>
     <thead>
       <tr>
+        <th scope="col">#</th>
         <th scope='col'>STT</th>
         <th scope='col'>Tên khóa học</th>
         <th scope='col'></th>
@@ -12,6 +33,9 @@
     <tbody>
       {{#each courses}}
         <tr>
+          <td>
+            <input name="idCourses" value="{{this._id}}" type="checkbox" class="select-item-box">
+          </td>
           <td>{{sum @index 1}}</td>
           <td>{{this.name}}</td>
           <td class=''>
@@ -31,7 +55,7 @@
       {{/each}}
     </tbody>
   </table>
-</div>
+</form>
 
 {{#each courses}}
   <div class='modal' tabindex='-1' id={{createId 'modal' @index}}>
@@ -68,3 +92,50 @@
     </div>
   </div>
 {{/each}}
+
+<script>
+  const selectAllItemBoxs = document.querySelector('#selectAllItemBoxs');
+  const listSelectItemBoxs = document.querySelectorAll('.select-item-box');
+  const inputGroupSelect = document.querySelector('#inputGroupSelect');
+  const btnSubmitAction = document.querySelector('#btnSubmitAction');
+  console.log(btnSubmitAction, inputGroupSelect);
+
+  const setDisabledBtnAction = () => {
+    if (inputGroupSelect.value != 'Chọn' && inputGroupSelect.disabled === false) {
+      btnSubmitAction.disabled = false;
+    }
+    else {
+      btnSubmitAction.disabled = true;
+    }
+  }
+
+  selectAllItemBoxs.addEventListener('change', () => {
+    const isChecked = selectAllItemBoxs.checked;
+    inputGroupSelect.disabled = !isChecked;
+    listSelectItemBoxs.forEach((item) => item.checked = isChecked);
+    setDisabledBtnAction();
+  })
+
+  listSelectItemBoxs.forEach((item) => {
+    item.addEventListener('click', () => {
+      const listCheckedItemBox = [...listSelectItemBoxs].filter((item) => {
+        setDisabledBtnAction();
+        return item.checked === true;
+      });
+
+      inputGroupSelect.disabled = (listCheckedItemBox.length === 0);
+
+      if (listSelectItemBoxs.length === listCheckedItemBox.length) {
+        selectAllItemBoxs.checked = true;
+      }
+      else {
+        selectAllItemBoxs.checked = false;
+      }
+      // setDisabledBtnAction();
+    })
+  })
+
+  inputGroupSelect.addEventListener('change', () => {
+    setDisabledBtnAction();
+  })
+</script>
