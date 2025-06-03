@@ -22,7 +22,6 @@ selectAllItemBoxs.addEventListener('change', () => {
 listSelectItemBoxs.forEach((item) => {
   item.addEventListener('click', () => {
     const listCheckedItemBox = [...listSelectItemBoxs].filter((item) => {
-      setDisabledBtnAction();
       return item.checked === true;
     });
 
@@ -33,6 +32,7 @@ listSelectItemBoxs.forEach((item) => {
     } else {
       selectAllItemBoxs.checked = false;
     }
+    setDisabledBtnAction();
     // setDisabledBtnAction();
   });
 });
